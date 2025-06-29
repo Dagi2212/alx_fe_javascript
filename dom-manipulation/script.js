@@ -6,7 +6,7 @@ const quotes = [
 ];
 
 const quoteDisplay = document.getElementById("quoteDisplay");
-const newQuoteBtn = document.getElementById("newQuote");
+const newQuoteBtn = document.getElementById("newQuoteBtn");
 const addQuoteBtn = document.getElementById("addQuoteBtn");
 
 // Display a random quote
@@ -43,7 +43,7 @@ function addQuote() {
   textInput.value = "";
   categoryInput.value = "";
 
-  // Optionally show the newly added quote
+  // Display the newly added quote
   showRandomQuote();
 }
 
