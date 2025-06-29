@@ -6,24 +6,31 @@ const quotes = [
 ];
 
 const quoteDisplay = document.getElementById("quoteDisplay");
-const newQuoteBtn = document.getElementById("newQuoteBtn");
-const addQuoteBtn = document.getElementById("addQuoteBtn");
 
-// Display a random quote
+// Function to display a random quote from the quotes array
 function showRandomQuote() {
   if (quotes.length === 0) {
     quoteDisplay.textContent = "No quotes available.";
     return;
   }
+
   const randomIndex = Math.floor(Math.random() * quotes.length);
   const quote = quotes[randomIndex];
-  quoteDisplay.innerHTML = `
-    <p>"${quote.text}"</p>
-    <small>— ${quote.category}</small>
-  `;
+
+  // Create elements dynamically
+  const quoteParagraph = document.createElement("p");
+  quoteParagraph.textContent = `"${quote.text}"`;
+
+  const categoryElement = document.createElement("small");
+  categoryElement.textContent = `— ${quote.category}`;
+
+  // Clear previous content and append new quote
+  quoteDisplay.innerHTML = "";
+  quoteDisplay.appendChild(quoteParagraph);
+  quoteDisplay.appendChild(categoryElement);
 }
 
-// Add a new quote
+// Function to add a new quote from user input
 function addQuote() {
   const textInput = document.getElementById("newQuoteText");
   const categoryInput = document.getElementById("newQuoteCategory");
@@ -36,20 +43,19 @@ function addQuote() {
     return;
   }
 
-  // Add to quotes array
+  // Add new quote to the array
   quotes.push({ text: newText, category: newCategory });
 
-  // Clear inputs
+  // Clear input fields
   textInput.value = "";
   categoryInput.value = "";
 
-  // Display the newly added quote
-  showRandomQuote();
+  // Optionally show success message or updated count
+  alert(`New quote added to "${newCategory}" category.`);
 }
 
-// Event Listeners
-newQuoteBtn.addEventListener("click", showRandomQuote);
-addQuoteBtn.addEventListener("click", addQuote);
+// Event listener for the "Show New Quote" button
+document.getElementById("newQuote").addEventListener("click", showRandomQuote);
 
-// Initial random quote on load
+// Automatically show a quote when the page loads
 window.onload = showRandomQuote;
