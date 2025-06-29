@@ -9,8 +9,8 @@ const quoteDisplay = document.getElementById("quoteDisplay");
 const newQuoteBtn = document.getElementById("newQuote");
 const addQuoteBtn = document.getElementById("addQuoteBtn");
 
-// ✅ Function name must be displayRandomQuote for auto-checker
-function displayRandomQuote() {
+// Display a random quote
+function showRandomQuote() {
   if (quotes.length === 0) {
     quoteDisplay.textContent = "No quotes available.";
     return;
@@ -23,7 +23,7 @@ function displayRandomQuote() {
   `;
 }
 
-// ✅ Must be named addQuote
+// Add a new quote
 function addQuote() {
   const textInput = document.getElementById("newQuoteText");
   const categoryInput = document.getElementById("newQuoteCategory");
@@ -36,17 +36,20 @@ function addQuote() {
     return;
   }
 
+  // Add to quotes array
   quotes.push({ text: newText, category: newCategory });
 
+  // Clear inputs
   textInput.value = "";
   categoryInput.value = "";
 
-  displayRandomQuote(); // Call correct function name
+  // Optionally show the newly added quote
+  showRandomQuote();
 }
 
-// ✅ These two must be set up exactly like this
-newQuoteBtn.addEventListener("click", displayRandomQuote);
+// Event Listeners
+newQuoteBtn.addEventListener("click", showRandomQuote);
 addQuoteBtn.addEventListener("click", addQuote);
 
-// ✅ Display a quote on page load
-window.onload = displayRandomQuote;
+// Initial random quote on load
+window.onload = showRandomQuote;
