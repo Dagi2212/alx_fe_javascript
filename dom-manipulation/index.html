@@ -21,7 +21,7 @@
       background-color: #f9f9f9;
     }
 
-    input[type="text"], #importFile {
+    input[type="text"], select, #importFile {
       width: 80%;
       padding: 8px;
       margin: 5px 0;
@@ -40,6 +40,15 @@
 </head>
 <body>
   <h1>Dynamic Quote Generator</h1>
+
+  <!-- Category Filter -->
+  <div>
+    <label for="categoryFilter">Filter by category:</label>
+    <select id="categoryFilter" onchange="filterQuotes()">
+      <option value="all">All Categories</option>
+      <!-- Categories will be populated here dynamically -->
+    </select>
+  </div>
 
   <!-- Quote Display -->
   <div id="quoteDisplay">Click the button to show a quote!</div>
