@@ -5,30 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dynamic Quote Generator</title>
   <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+      text-align: center;
+    }
+
     #quoteDisplay {
       font-size: 1.5em;
-      text-align: center;
       margin: 20px 0;
+      padding: 20px;
+      border-left: 4px solid #333;
+      background-color: #f9f9f9;
     }
-    #controls {
-      text-align: center;
+
+    input[type="text"] {
+      width: 80%;
+      padding: 8px;
+      margin: 5px 0;
     }
-    input, button {
-      margin: 5px;
+
+    button {
+      padding: 10px 15px;
+      margin-top: 10px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <div id="quoteDisplay"></div>
-  <div id="controls">
-    <button id="newQuoteBtn">Show New Quote</button>
-    <h3>Add a New Quote:</h3>
-    <input type="text" id="newQuoteText" placeholder="Enter quote text" />
-    <input type="text" id="newQuoteCategory" placeholder="Enter category" />
-    <button id="addQuoteBtn">Add Quote</button>
+  <h1>Dynamic Quote Generator</h1>
+
+  <!-- Quote Display -->
+  <div id="quoteDisplay">Click the button to show a quote!</div>
+
+  <!-- Button to Show New Quote -->
+  <button id="newQuote">Show New Quote</button>
+
+  <!-- Form to Add New Quote -->
+  <div id="addQuoteForm">
+    <input type="text" id="newQuoteText" placeholder="Enter a new quote" />
+    <input type="text" id="newQuoteCategory" placeholder="Enter quote category" />
+    <button onclick="addQuote()">Add Quote</button>
   </div>
 
   <!-- Link to external JavaScript -->
-  <script src="quotes.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
