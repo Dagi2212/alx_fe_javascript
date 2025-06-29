@@ -7,7 +7,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      max-width: 600px;
+      max-width: 700px;
       margin: auto;
       padding: 20px;
       text-align: center;
@@ -21,7 +21,7 @@
       background-color: #f9f9f9;
     }
 
-    input[type="text"] {
+    input[type="text"], #importFile {
       width: 80%;
       padding: 8px;
       margin: 5px 0;
@@ -29,8 +29,12 @@
 
     button {
       padding: 10px 15px;
-      margin-top: 10px;
+      margin: 10px 5px;
       cursor: pointer;
+    }
+
+    .hidden {
+      display: none;
     }
   </style>
 </head>
@@ -40,17 +44,23 @@
   <!-- Quote Display -->
   <div id="quoteDisplay">Click the button to show a quote!</div>
 
-  <!-- Button to Show New Quote -->
+  <!-- Buttons -->
   <button id="newQuote">Show New Quote</button>
 
-  <!-- Form to Add New Quote -->
-  <div id="addQuoteForm">
+  <!-- Add Quote Form -->
+  <div>
     <input type="text" id="newQuoteText" placeholder="Enter a new quote" />
-    <input type="text" id="newQuoteCategory" placeholder="Enter quote category" />
+    <input type="text" id="newQuoteCategory" placeholder="Enter category" />
     <button onclick="addQuote()">Add Quote</button>
   </div>
 
-  <!-- Link to external JavaScript -->
+  <!-- Import/Export Controls -->
+  <div>
+    <input type="file" id="importFile" accept=".json" onchange="importFromJsonFile(event)" />
+    <button onclick="exportToJsonFile()">Export Quotes to JSON</button>
+  </div>
+
+  <!-- Script -->
   <script src="script.js"></script>
 </body>
 </html>
