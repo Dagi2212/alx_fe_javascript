@@ -1,18 +1,21 @@
-// Load quotes from localStorage or initialize an empty array
+// Local quotes array
 let quotes = [];
 
-// Load saved quotes on page load
+// Simulated server endpoint
+const SERVER_URL = "https://jsonplaceholder.typicode.com/posts ";
+
+// Load saved quotes from localStorage or use defaults
 function loadQuotes() {
   const storedQuotes = localStorage.getItem("quotes");
   if (storedQuotes) {
     quotes = JSON.parse(storedQuotes);
   } else {
-    // Default quotes
     quotes = [
-      { text: "The best way to get started is to quit talking and begin doing.", category: "Motivation" },
-      { text: "Life is what happens when you're busy making other plans.", category: "Life" },
-      { text: "Success usually comes to those who are too busy to be looking for it.", category: "Success" }
+      { id: 1, text: "The best way to get started is to quit talking and begin doing.", category: "Motivation", lastModified: Date.now() },
+      { id: 2, text: "Life is what happens when you're busy making other plans.", category: "Life", lastModified: Date.now() },
+      { id: 3, text: "Success usually comes to those who are too busy to be looking for it.", category: "Success", lastModified: Date.now() }
     ];
+    saveQuotes();
   }
 }
 
@@ -109,7 +112,15 @@ function addQuote() {
     return;
   }
 
-  quotes.push({ text: newText, category: newCategory });
+  const newId = Date.now(); // Temporary ID
+
+  quotes.push({
+    id: newId,
+    text: newText,
+    category: newCategory,
+    lastModified: Date.now(),
+    localOnly: true
+  });
   saveQuotes();
 
   textInput.value = "";
@@ -118,7 +129,7 @@ function addQuote() {
   // Repopulate categories in case a new one was added
   populateCategories();
 
-  alert(`New quote added to "${newCategory}" category.`);
+  notifyUser(`New quote added locally (will sync shortly).`);
 }
 
 // Export quotes to JSON file
@@ -152,28 +163,3 @@ function importFromJsonFile(event) {
 
       // Validate imported data
       if (Array.isArray(importedQuotes) && importedQuotes.every(q => q.text && q.category)) {
-        quotes.push(...importedQuotes);
-        saveQuotes();
-        populateCategories(); // Refresh categories
-        alert(`${importedQuotes.length} quote(s) imported successfully!`);
-        showRandomQuote(); // Show one of the new quotes
-      } else {
-        alert("Invalid JSON format. Please ensure the file contains an array of quote objects with 'text' and 'category'.");
-      }
-    } catch (error) {
-      alert("Error reading JSON file: " + error.message);
-    }
-  };
-
-  fileReader.readAsText(file);
-}
-
-// Event listener for the "Show New Quote" button
-document.getElementById("newQuote").addEventListener("click", showRandomQuote);
-
-// Initialize app
-window.onload = () => {
-  loadQuotes();
-  populateCategories();
-  filterQuotes(); // This will also call showRandomQuote()
-};
