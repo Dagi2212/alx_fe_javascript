@@ -250,7 +250,38 @@ function notifyUser(message, isError = false) {
 
   setTimeout(() => notif.style.display = "none", 5000);
 }
+// Function to dynamically create the "Add Quote" form
+function createAddQuoteForm() {
+  const container = document.createElement("div");
+  container.id = "addQuoteForm";
 
+  // Input for quote text
+  const quoteInput = document.createElement("input");
+  quoteInput.type = "text";
+  quoteInput.id = "newQuoteText";
+  quoteInput.placeholder = "Enter a new quote";
+
+  // Input for category
+  const categoryInput = document.createElement("input");
+  categoryInput.type = "text";
+  categoryInput.id = "newQuoteCategory";
+  categoryInput.placeholder = "Enter quote category";
+
+  // Button to add quote
+  const addButton = document.createElement("button");
+  addButton.textContent = "Add Quote";
+  addButton.onclick = addQuote;
+
+  // Append all elements to container
+  container.appendChild(quoteInput);
+  container.appendChild(document.createElement("br")); // line break
+  container.appendChild(categoryInput);
+  container.appendChild(document.createElement("br"));
+  container.appendChild(addButton);
+
+  // Append form to body or desired parent element
+  document.body.appendChild(container);
+}
 // Event listeners
 document.getElementById("newQuote").addEventListener("click", showRandomQuote);
 document.getElementById("syncButton").addEventListener("click", syncQuotes);
@@ -260,6 +291,7 @@ window.onload = () => {
   loadQuotes();
   populateCategories();
   filterQuotes();
+  createAddQuoteForm();
 };
 
 // Auto-sync every 30s
