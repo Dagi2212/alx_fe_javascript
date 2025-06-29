@@ -134,21 +134,28 @@ function populateCategories() {
 }
 
 // Filter quotes based on selected category
-function filterQuotes() {
-  const selected = document.getElementById("categoryFilter").value;
-  localStorage.setItem("lastFilter", selected);
+// Show random quote from filtered list
+let filteredQuotes = [];
 
-  if (selected === "all") {
+function filterQuotes() {
+  const categoryFilter = document.getElementById("categoryFilter");
+
+  // ✅ EXPLICITLY declare selectedCategory
+  const selectedCategory = categoryFilter.value;
+
+  // Update localStorage
+  localStorage.setItem("lastFilter", selectedCategory);
+
+  // Filter quotes based on selectedCategory
+  if (selectedCategory === "all") {
     filteredQuotes = [...quotes];
   } else {
-    filteredQuotes = quotes.filter(q => q.category === selected);
+    filteredQuotes = quotes.filter(q => q.category === selectedCategory);
   }
 
+  // Show a random quote from filtered list
   showRandomQuote();
 }
-
-// Show random quote
-let filteredQuotes = [];
 
 function showRandomQuote() {
   const display = document.getElementById("quoteDisplay");
