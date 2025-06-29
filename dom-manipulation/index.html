@@ -33,20 +33,29 @@
       cursor: pointer;
     }
 
-    .hidden {
+    .notification {
+      margin-top: 10px;
+      padding: 10px;
+      color: green;
       display: none;
+    }
+
+    .error {
+      color: red;
     }
   </style>
 </head>
 <body>
   <h1>Dynamic Quote Generator</h1>
 
+  <!-- Notification -->
+  <div id="notification" class="notification"></div>
+
   <!-- Category Filter -->
   <div>
     <label for="categoryFilter">Filter by category:</label>
     <select id="categoryFilter" onchange="filterQuotes()">
       <option value="all">All Categories</option>
-      <!-- Categories will be populated here dynamically -->
     </select>
   </div>
 
@@ -55,6 +64,7 @@
 
   <!-- Buttons -->
   <button id="newQuote">Show New Quote</button>
+  <button onclick="syncWithServer()">Sync Now</button>
 
   <!-- Add Quote Form -->
   <div>
@@ -69,7 +79,6 @@
     <button onclick="exportToJsonFile()">Export Quotes to JSON</button>
   </div>
 
-  <!-- Script -->
   <script src="script.js"></script>
 </body>
 </html>
